@@ -1,0 +1,56 @@
+block item-details
+  div.row
+    h1
+    form#add-edit-wine
+      div.form-group.hidden
+        label(for="wineID") ID
+        input#wineID.form-control(type="text") 
+      div.form-group
+        label(for="wineGrape") Grape
+        input#wineGrape.form-control(type="text" placeholder="Shiraz") 
+      div.form-group
+        label(for="wineEstate") Estate
+        input#wineEstate.form-control(type="text" placeholder="Penfolds")
+      div.form-group
+        label(for="wineName") Wine
+        input#wineName.form-control(type="text" placeholder="2012 Bin 104 Special Reserve")
+      div.form-group
+        label(for="wineNotes") Notes
+        textarea#wineNotes.form-control(type="text" placeholder="Spicy with hints of orange zest")  
+      div.form-group
+        label(for="wineRating") Rating
+        select#wineRating.form-control
+          option 10
+          option 9.9     
+          option 9.8  
+          option 9.7  
+          option 9.6  
+          option 9.5  
+          option 9.4  
+          option 9.3  
+          option 9.2  
+          option 9.1
+          option 9.0
+          option 8.9     
+          option 8.8  
+          option 8.7  
+          option 8.6  
+          option 8.5  
+          option 8.4  
+          option 8.3  
+          option 8.2  
+          option 8.1
+          option 8.0 
+          option 7.5
+          option 7.0 
+          option 6.5
+          option 6.0 
+          option 5.5
+          option 5.0
+          option 4.0
+          option 3.0 
+          option 2.0
+          option 1.0     
+  div.row.footer
+    button#cancel.btn.btn-default(type="button" data-dismiss="modal") Cancel
+    button#save.btn.btn-primary(type="button") Save                             

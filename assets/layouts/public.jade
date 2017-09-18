@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    block head
+      title= project.name + ' ' 
+        | are alive and well.
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='styles/vendor.min.css')
+    link(rel='stylesheet', href='styles/public.min.css')
+    link(rel='stylesheet', href='styles/index.min.css')
+    script(src='views/templates.js')
+    block neck
+  body
+    div#header.navbar.navbar-default.navbar-fixed-top
+      block header
+
+    div.page
+      div.container
+        div#home
+          block home
+        div#about
+          block about
+        div#cellar
+          block cellar
+        div#item-details
+          block item-details  
+        div#profile
+          block profile
+        div#admin
+          block admin
+        div#forgot
+          block forgot 
+        div#reset
+          block reset          
+
+    div.footer
+      div.container
+        span.copyright.pull-right
+          | &copy;
+          = ' ' + project.company + ' '
+          | 2015.
+        div.clearfix
+
+    //if lte IE 9
+      script(src='scripts/ie-sucks.min.js')
+    script(src='scripts/vendor.min.js')
+    script(src='scripts/public.min.js')
+    script(src='scripts/index.min.js')  
+
+    block feet

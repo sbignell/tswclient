@@ -1,0 +1,16 @@
+block reset
+  div.row
+    div.col-sm-6
+      div.page-header
+        h1 Reset Your Password
+      div#resetForm
+        form
+          div.form-group
+            label New Password:
+            input#resetPassword.form-control(type='password', name='password')
+          div.form-group
+            label Confirm Password:
+            input#resetConfirm.form-control(type='password', name='confirm')
+          div.form-group
+            button#doReset.btn.btn-primary.btn-reset(type='button') Set Password
+          div#resetErrors.form-group     

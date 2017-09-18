@@ -1,0 +1,134 @@
+block admin
+  div.row
+    div.col-sm-6
+      div.page-header
+        h1 Admin Area
+      div.row
+        div.col-sm-4
+          div.well.stat
+            div#no-users.stat-value
+            div.stat-label Users
+        div.col-sm-4
+          div.well.stat
+            div#no-admins.stat-value
+            div.stat-label Admins
+        div.col-sm-4
+          div.well.stat
+            div#no-wines.stat-value
+            div.stat-label Wines        
+    div.col-sm-6.special
+      div.page-header
+        h1 Super Dashboard
+      i.fa.fa-5x.fa-gears.super-awesome
+  div.row
+    div.col-md-8.col-md-offset-2
+      div#manage-users-table.panel.panel-default
+        div.panel-heading
+          div.btn-group.pull-right(role="group" aria-label="...")  
+          h3.panel-title
+            | Manage Users
+        div.panel-body
+        table.table.table-striped
+          thead
+            tr
+              th id
+              th username
+              th email
+              th active
+              th verified
+              th roles
+          tbody#admin-results-rows 
+  div.row
+    div#add-user-modal.modal.fade
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h4.modal-title Add User
+          div.modal-body
+            form
+              div.form-group
+                label(for="userUsername") Username
+                input#userUsername.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="userEmail") Email
+                input#userEmail.form-control(type="text" placeholder="")   
+          div.modal-footer
+            button#cancel-user.btn.btn-default(type="button" data-dismiss="modal") Cancel
+            button#submit-add-user.btn.btn-primary(type="button") Save                                                                  
+  div.row
+    div#edit-user-modal.modal.fade
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h4.modal-title Edit User
+          div.modal-body
+            form
+              div.form-group
+                label(for="editUsername") Username
+                input#editUsername.form-control(type="text" placeholder="" disabled)
+              div.form-group
+                label(for="editEmail") Email
+                input#editEmail.form-control(type="text" placeholder="" disabled)
+              div.form-group
+                label(for="editFirst") First Name
+                input#editFirst.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="editLast") Last Name
+                input#editLast.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="activeRadios") is Active?
+                div#activeRadios
+                  div.radioActive
+                    label
+                      input(type="radio" name="activeRadios" id="optionsRadios1" value="yes")
+                      |   yes
+                  div.radioActive
+                    label
+                      input(type="radio" name="activeRadios" id="optionsRadios2" value="no")
+                      |   no
+              div.form-group
+                label(for="verifiedRadios") is Verified?
+                div#verifiedRadios
+                  div.radioVerified
+                    label
+                      input(type="radio" name="verifiedRadios" id="optionsRadios1" value="yes")
+                      |   yes
+                  div.radioVerified
+                    label
+                      input(type="radio" name="verifiedRadios" id="optionsRadios2" value="no")
+                      |   no
+              div.form-group
+                label(for="editRoles") Roles
+                div#editRolesAdmin.checkbox
+                  label
+                    input.admin(type="checkbox" value="admin")
+                    | Admin
+                div#editRolesUser.checkbox
+                  label
+                    input.user(type="checkbox" value="user")
+                    | User
+              div.form-group
+                label(for="editGroups") Groups
+                select#editGroups.form-control(multiple)     
+              div.form-group
+                label(for="editPhone") Phone Number
+                input#editPhone.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="editTwitter") Twitter Key
+                input#editTwitter.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="editFacebook") Facebook Key
+                input#editFacebook.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="editGoogle") Google Key
+                input#editGoogle.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="editGithub") Github Key
+                input#editGithub.form-control(type="text" placeholder="")                  
+          div.modal-footer
+            button#cancel-user.btn.btn-default(type="button" data-dismiss="modal") Cancel
+            button#submit-edit-user.btn.btn-primary(type="button") Save                                                                    

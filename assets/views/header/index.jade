@@ -1,0 +1,50 @@
+block header  
+  div.container
+    div.navbar-header
+      a#gotoHome.navbar-brand(href='#')
+        img.navbar-logo(src='media/ss-logo-64.png')
+        span.navbar-brand-label= '  ' + project.name 
+      button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    div.navbar-collapse.my-navbar-collapse.collapse
+      ul#public-menu.nav.navbar-nav
+        li: a#gotoAbout(href='#') About
+        li: a#gotoCellar(href='#') Wine Cellar
+      div.pull-right
+        div.dropdown
+          button#signinupDropdown.btn.btn-primary.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
+            | Sign-In/Up 
+            span.caret
+          ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
+            form#signForm
+              div.form-group
+                label(for="inputUsername") Username
+                input#inputUsername.form-control(type="text" placeholder="Enter username")
+              div.form-group
+                label(for="inputPassword") Password
+                input#inputPassword(type="password" class="form-control" placeholder="Password")
+              button#doSignIn.btn.btn-info.btn-block Sign In
+              p#forgotResetLine.small 
+               a#gotoForgot(href='#') Forgot Password
+              hr  
+              div#signUpEmail.form-group
+                label(for="inputEmail") Email
+                input#inputEmail.form-control(type="email" placeholder="Enter email")    
+              
+              button#doSignUp.btn.btn-warning.btn-block Sign Up
+              //div#social-signup
+              //  p - or -
+              //  div#social-signup-buttons
+              //   a#facebook.btn.btn-secondary(href="#" role="button")
+              //    i.fa.fa-facebook
+              //   a#twitter.btn.btn-secondary(href="#" role="button")
+              //    i.fa.fa-twitter
+              //   a#google.btn.btn-secondary(href="#" role="button")
+              //    i.fa.fa-google
+              //   a#github.btn.btn-secondary(href="#" role="button")
+              //    i.fa.fa-github 
+              div#signStatus
+                span.fa.fa-5x.fa-spinner.fa-spin
+              div#signAlert    

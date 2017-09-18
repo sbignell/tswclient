@@ -1,0 +1,147 @@
+block cellar
+  div.row
+    div.media
+      div.media-left
+        img.media-object(src="media/Robert3.png")
+      div.media-body
+        h4.media-heading Welcome, friend
+        p.cellarConversation I love wine, but I'm irritated that your wine cellar is empty! Sign up/in to start building it now. In the meantime below is a peek at some of my favourite drops! 
+        p My wine cellar is built on mysql and I interact with it via the great npm module Sequelize. I could of course use mongodb instead, however in this configuration you can gain an understanding of how to integrate mysql into your project rather than the usual choice of mongodb.
+      div.clearfix
+  div.row
+    div.col-md-8.col-md-offset-2
+      div.panel.panel-default
+        div.panel-heading
+          div.btn-group.pull-right(role="group" aria-label="...")  
+          h3.panel-title
+            img.wines(src="media/wines.png") 
+            |  Sid's Top 20  
+        div.panel-body
+        table.table
+          thead
+            th Grape
+            th Estate
+            th Vintage
+            th Notes
+            th Rating
+          tbody#results-rows
+            tr
+              td Cabernet Sauvignon
+              td Domaine Naturaliste
+              td 2012 Rebus Margaret River
+              td A 94/6% cabernet and merlot blend, fermented and matured separately in French barriques (33% new) for 12 months. Strikingly pure, the fine texture underpinned by perfectly handled tannins; the aftertaste lingers for minutes. A wine of highest quality.
+              td 9.8
+            tr
+              td Shiraz
+              td Tahbilk
+              td 2009 1860 Vines Shiraz
+              td This is liquid history, as every one of the vines were planted in 1860, with no replants – just gaps where vines have died. This is a super-elegant, perfectly balanced, medium-bodied wine, the flavours encompassing black cherry, plum and dried herb, fine tannins and high quality French oak providing the gently savoury finish.
+              td 9.8
+            tr
+              td Pinot Noir
+              td Tolpuddle Vineyard
+              td 2013 Tolpuddle Vineyard Pinot Noir
+              td Bright, clear crimson; the bouquet is at once powerful yet eloquently varietal in precisely the same fashion as the palate; here black cherry and plum lead the way, red fruits bringing up the rear; it has exceptional intensity and drive, with fine tannins reminiscent of top-flight Burgundy.
+              td 9.7
+            tr
+              td Chardonnay
+              td Heemskerk
+              td 2012 Coal River Valley Chardonnay
+              td Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.
+              td 9.8
+            tr
+              td Rose
+              td Turkey Flat
+              td 2014 Barossa Valley Rose
+              td A single vineyard wine; no wonder it is one of the best-selling rosés on the market. Its upgraded label and branded bottle draw the eye; it is supremely elegant, fresh and balanced; its red fruits sparkle like stars on a clear night – there is no distraction from its message.
+              td 9.5
+            tr
+              td Shiraz
+              td Willow Bridge
+              td 2013 Willow Bridge Estate Dragonfly Geographe Shiraz
+              td Bright crimson; the fragrant, verging flowery, bouquet has red berries, spice and a dusting of cooking chocolate, the supple medium-bodied palate spanning a similar range, starting with sweet fruit and finishing with fine, cedary tannins reflecting maturation in new and used French oak.
+              td 9.4
+            tr
+              td Semillon
+              td Tyrrells
+              td 2014 Tyrrell’s Johnno's Semillon
+              td From the HVD 1908 estate vineyard on alluvial sandy flats, with wild-fermented cloudy juice. How much of its character comes from the 100-plus-year-old vines and how much from the winemaking is immaterial; it has an extra level of flavour, texture and structure, zesty/lemony acidity providing its farewell call. 250 dozen made.
+              td 9.7
+            tr
+              td Semillon 
+              td Pepper Tree
+              td 2014 Single Vineyard Reserve Alluvius Hunter Valley Semillon
+              td Braemore Vineyard, planted by Ken Bray at the end of the ’60s, is one of the best in the Valley, Thomas Wines and Pepper Tree its greatest supporters. The wine fills every corner of the mouth with lemongrass and lemon-citrus flavours, finely detailed acidity extending its length and cellaring future.
+              td 9.6
+            tr
+              td Shiraz
+              td Henschke
+              td 2012 Mount Edelstone
+              td Vivid, deep purple-crimson; this is a blue-blood aristocratic shiraz, certain in its supreme power, length and balance, and not out to prove anything. Any doubts about its quality will fall away over the decades ahead as it will be recognised as one of the greatest Mount Edelstones.
+              td 9.8
+            tr
+              td Shiraz
+              td Seppelt
+              td 2012 St Peters Grampians Shiraz
+              td Open-fermented and hand-plunged, matured in new and used French barriques for 14 months. The black fruit iron fist in the flowery, spicy, velvet glove will guarantee the wine a long life; it has the innate balance and length that the region can provide like few others.
+              td 9.7
+            tr
+              td Cabernet Merlot
+              td Watershed
+              td 2011 Premium Senses Margaret River Cabernet Merlot
+              td The bright coloured 70/30% blend was matured for 18 months in French oak; the medium-bodied palate has exceptionally good texture and structure to its array of cassis, redcurrant and cedary flavours, fine, ripe tannins driving the finish.
+              td 9.6
+            tr
+              td Riesling
+              td Alkoomi
+              td 2014 Black Label Frankland River Riesling
+              td Estate-grown 40-year-old vines, and only free-run juice, gives the wine a flying start. Its intensity is outstanding, driving along the palate with high speed, the Bickford’s lime juice flavours running unabated through the finish and well into the lingering aftertaste. An exceptional wine.
+              td 9.7
+            tr
+              td Sauvignon Blanc 
+              td Flowstone 
+              td 2012 Margaret River Sauvignon Blanc 
+              td Follows in the footsteps of the unorthodox but brilliantly successful ’11 inaugural release. The synergy between the grape and the unusual vinification, orchestrated by winemaker Stuart Pym, is spectacularly successful; the flavours are a Joseph’s coat of complexity, yet indivisible, zesty acidity guaranteeing a long future.
+              td 9.7
+            tr
+              td Shiraz Viognier
+              td Santolin 
+              td 2013 A&amp;R Reserve Boy Meets Girl 
+              td The bright, juicy red fruit aromas and flavours would suggest the viognier was co-fermented – an assumption underlined by the vivid colour. A genuinely lovely medium-bodied shiraz, ready now. I hope the guardians of public morality don’t get to read the text on the back label.
+              td 9.3
+            tr
+              td Riesling
+              td Bundaleer 
+              td 2014 Stony Place Clare Valley Riesling
+              td The vineyard that produces the grapes for this wine has an X-factor resulting in intense lemon and lime fruit, and even more striking citrus-linked acidity on the finish and long-lived aftertaste. A brilliant style that will age superbly, and proves the ’13 Stony Place was no fluke.
+              td 9.5
+            tr
+              td Sauvignon Blanc
+              td Rosily
+              td 2014 Rosily Vineyard Margaret River Sauvignon Blanc
+              td The 12.3ha estate vineyard is in the Wilyabrup district; a good start, the promise fulfilled by a full suite of lemongrass, herb and gooseberry flavours augmented by a touch of oak that fits like a glove. Rosily seldom misses the boat with its white wines, and certainly doesn’t here.
+              td 9.4
+            tr
+              td Chardonnay 
+              td Fighting Gully
+              td 2013 Fighting Gully Road Beechworth Chardonnay
+              td Wild yeast-fermented in mainly used French barriques, aged on lees for 10 months. It has the refined concentration of French white Burgundies, its flavour spectrum perfectly balanced between white peach and grapefruit. Top Beechworth gold (97 points) James Halliday Wine Challenge ’14.
+              td 9.7
+            tr
+              td Pinot Noir
+              td Yabby Lake
+              td 2013 Single Block Release Block 1 Mornington Peninsula Pinot Noir 
+              td Cold soaked in small open pots 14 days on skins; matured in French puncheons for 10 months. Bright crimson; highly floral bouquet scented with intriguing Asian spices shot through its red and black cherry fruits, the long palate combining all characters with a nuanced savoury twist.
+              td 9.7
+            tr
+              td Shiraz
+              td Skillogalee  
+              td 2012 Trevarrick Single Contour Clare Valley Shiraz
+              td From the estate hillside vines planted in 1970. Deep, dense crimson-purple; a wine of great class and elegance, with a seductive array of blackberry and black cherry fruits, spice and pepper on its bouquet, precisely repeated on the supple, juicy, silky medium-bodied palate.
+              td 9.7
+            tr
+              td Shiraz Mourvedre
+              td McPherson 
+              td 2013 McPherson MWC Shiraz Mourvedre
+              td A 95/5% blend matured in French oak. Has everything one might wish for at this price; the supple, medium to full-bodied palate provides a reprise of the gently spicy black cherry/berry aromas of the bouquet, adding savoury tannins (probably from the mourvèdre) to provide texture and length.
+              td 9.4    

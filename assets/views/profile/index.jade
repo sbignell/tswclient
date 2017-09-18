@@ -1,0 +1,76 @@
+block profile
+  div.row
+    div.col-sm-6
+      div.page-header
+        h1 My Profile
+          button#profile-settings.btn.btn-primary.pull-right(data-toggle="modal" data-target="#profile-settings-modal" data-backdrop="false") Settings
+      div.row
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.no-of-wines <%= noWines %>
+            div.stat-label # of Wines
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.avg-rating <%= avgRating %>
+            div.stat-label Avg Rating
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.week-of-year --
+            div.stat-label Week of Year
+      div.row
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.day-of-week --
+            div.stat-label Day of Week
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.week-year --
+            div.stat-label Week Year
+        div.col-sm-4
+          div.well.stat
+            div.stat-value.hour-of-day --
+            div.stat-label Hour of Day
+    div.col-sm-6.special
+      div.page-header
+        h1 Go Faster Everyday
+      img.media-object(src='media/Clive.png', style='width: 110px; height: 209px;')
+  div.row
+    div#profile-settings-modal.modal.fade
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h4.modal-title Profile Settings
+          div.modal-body
+            form
+              div.form-group
+                label(for="profileUsername") Username
+                input#profileUsername.form-control(type="text" placeholder="" disabled)
+              div.form-group
+                label(for="profileEmail") Email
+                input#profileEmail.form-control(type="text" placeholder="" disabled)
+              div.form-group
+                label(for="profileFirst") First Name
+                input#profileFirst.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profileLast") Last Name
+                input#profileLast.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profilePhone") Phone
+                input#profilePhone.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profileTwitter") Twitter Key
+                input#profilewitter.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profileFacebook") Facebook Key
+                input#profileFacebook.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profileGoogle") Google Key
+                input#profileGoogle.form-control(type="text" placeholder="")
+              div.form-group
+                label(for="profileGithub") Github Key
+                input#profileGithub.form-control(type="text" placeholder="")   
+          div.modal-footer
+            button#cancel-profile.btn.btn-default(type="button" data-dismiss="modal") Cancel
+            button#submit-profile.btn.btn-primary(type="button") Save                                 

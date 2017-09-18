@@ -1,0 +1,9 @@
+td.delete 
+  input.delete-user(type='checkbox')
+td <%= attributes.id %>
+td 
+  a#loadEditModal(href="#" data-toggle="modal" data-target="#edit-user-modal" data-backdrop="false") <%= attributes.username %>
+td <%= attributes.email %>
+td <%= attributes.isActive %>
+td <%= attributes.isVerified %>
+td <%= attributes.roles %>
