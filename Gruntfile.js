@@ -54,7 +54,7 @@ module.exports = function(grunt) {
       },
       dest: {
         files: [
-          { expand: true, cwd: 'www', src: ['**'], dest: '../sid/client/' }
+          { expand: true, cwd: 'www', src: ['**'], dest: '../topshelf/client/' }
         ]
       }
     },
@@ -71,6 +71,7 @@ module.exports = function(grunt) {
           "assets/views/header/tmpl-header.html": ["assets/views/header/*.jade"],
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
+          "assets/views/features/tmpl-features.html": ["assets/views/features/index.jade"],
           "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/index.jade"],
           "assets/views/profile/tmpl-profile.html": ["assets/views/profile/index.jade"],
           "assets/views/admin/tmpl-admin.html": ["assets/views/admin/index.jade"],
@@ -196,7 +197,7 @@ module.exports = function(grunt) {
         src: ['assets/vendor/**']
       },
       dest: {
-        src: ['../sid/client/**']
+        src: ['../topshelf/client/**']
       }
     }
   });

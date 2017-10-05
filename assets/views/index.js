@@ -50,7 +50,10 @@
       facebookKey: '',
       googleKey: '',
       githubKey: '',
-      createdById: ''
+      createdById: '',
+      createdDate: ''
+      //country
+      //currency
     }
   });
 
@@ -58,12 +61,24 @@
     //idAttribute: 'id',
     defaults: {
       id: undefined,
-      grape: '',
-      estate: '',
-      name: '',
-      notes: '',
-      rating: '',
-      createdById: ''
+      varietal: '',
+      producer: '',
+      wineName: '',
+      vintage: '',
+      myNotes: '',
+      myRating: '',
+      commonRating:  '',
+      commonNotes: '',
+      producerNotes: '',
+      wineLabel: '',
+      wineRRP: '',
+      quantity: '',
+      countryOfOrigin: '',
+      regionOfOrigin: '',
+      wineAwards: '',
+      createdById: '',
+      createdAt: '',
+      updatedAt: ''
     },
     url: function() {
       return '/api/v1/cellar/'+ (this.isNew() ? '' : this.id +'/');
@@ -72,6 +87,12 @@
 
   app.RecordCollection = Backbone.Collection.extend({
     model: app.Record,
+    cellarName: '',
+    physicalAddress: '',
+    capacity: '',
+    modelName:'',
+    modelNumber: '',
+    manufacturer: '',
     url: '/api/v1/cellar/'
   });
 
@@ -107,26 +128,6 @@
   //*************        CELLAR      ************************//
   /////////////////////////////////////////////////////////////
 
-  app.CellarView = Backbone.View.extend({
-    el: '#cellar',
-    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
-    initialize: function() {
-      console.log('cellarView loaded.');
-      
-      this.render();
-  
-    },
-    render: function() {
-
-      console.log('cellarView: render');
-
-
-      this.$el.html(this.template( 'hello' ));
-
-      return this;
-    }
-  });
-
   app.MyCellarView = Backbone.View.extend({
     el: '#cellar',
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
@@ -134,7 +135,7 @@
       'click #add-wine': 'addWine',
       'click #submit-wine': 'submitWine',
       'click #cancel-wine': 'cancelWine',
-      'click .delete-wine': 'deleteWine'
+      'click #delete-wine': 'deleteWine'
     },
     initialize: function() {
       console.log('mycellarView loaded.');
@@ -144,6 +145,9 @@
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.render);
       this.listenTo(this.collection, 'remove', this.render);
+
+      this.collection.on('change', this.render, this);
+
       this.collection.fetch({
         success: function(collection, response, options){
           //console.log('collection, response, options');
@@ -170,44 +174,27 @@
       console.log('mycellarView: render');
       console.log(this.collection.length);
 
-      //console.dir(app.user.attributes);
 
       this.$el.html(this.template());
 
-      //Add + button
-      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
-      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
-      //Add the delete heading
-      $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
       //remove Sid's top 20 records
       $('#results-rows').empty();
 
       if(this.collection.length == 0){
         console.log('We need to add the dummy item');
-        $('#results-rows').append('<tr><td>Chardonnay</td><td>Heemskerk</td><td>2012 Coal River Valley Chardonnay</td><td>Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.</td><td>9.8</td></tr>');
+        $('#results-rows').append('<tr><td></td><td>Chardonnay</td><td>Heemskerk</td><td>Coal River Valley Chardonnay</td><td>2012</td><td>12</td><td>Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.</td><td>9.8</td><td>01-07-2017: 12 added</td></tr>');
       }
 
-      var welcomeText = 'Welcome, ' + app.user.attributes.username;
-      var cellarBlurb1 = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
-      var cellarBlurb2 = 'Excellent, I see you have great taste in wine! Keep building your cellar!';
-      var cellarBlurb3 = 'This is quite the collection you have! You\'ll need to stop there or you risk overshadowing me!!';
-      var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
-      
+      var welcomeText = 'Welcome, ' + app.user.attributes.firstname + '!';
+   
       $('#cellar div.media-body h4.media-heading').html(welcomeText);
-      if (this.collection.length == 0){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb1);
-      } else if (this.collection.length < 20){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb2);
-      } else if (this.collection.length == 20){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb3);
-      }
-      $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
+
 
       var frag = document.createDocumentFragment();
       console.log('reached wine record creation');
       this.collection.each(function(record) {
-        console.log('Wine name is: ' + record.attributes.name);
+        //console.log('Wine name is: ' + record.attributes.name);
         var view = new app.ResultsRowView({ model: record });
         frag.appendChild(view.render().el);
       }, this);
@@ -226,25 +213,23 @@
     },
     deleteWine: function(e){
       console.log('delete wine');
-      console.dir($(e.currentTarget).closest('tr'));
+      
       var self = this;
       var siblings = $(e.currentTarget).closest('tr').children();
+      console.dir(siblings);
 
-      console.log('wineName: ');
-        console.dir(siblings[3]);
+      //fadeOut?
 
-      //parent tr remove, fadeOut
+      //find wine to remove from collection
       var removeWine = this.collection.findWhere({
-        name: siblings[3].innerText
+        id: parseInt(siblings[2].innerText)
       });
-      console.log('removeWine: ')
-      console.dir(removeWine);
 
+      //Remove wine
       removeWine.destroy().complete(function(){
-          self.collection.fetch();
+          //self.collection.fetch();
         });
 
-      //this.collection.remove(removeWine);
     }
   });
 
@@ -252,7 +237,7 @@
     tagName: 'tr',
     //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      'click td.name': 'viewDetails'
+      'click #wine-details': 'viewDetails'
     },
     viewDetails: function() {
       //location.href = this.model.url();
@@ -260,7 +245,7 @@
     },
     render: function() {
       console.log('ResultsRowView: render');
-      console.dir(this.model.attributes);
+      //console.dir(this.model.attributes);
 
       //this.$el.html(this.template( this.model ));
       this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
@@ -288,16 +273,22 @@
       return this;
     },
     doShowDetails: function(model){
+
+      //If the form has been loaded in the session already
+      //it shows the prior wine.. we need to rese tthe form each time!
+
       console.log('doShowView: ');
       if(model != undefined){
         //existing wine clicked from list
         console.dir(model);        
-        $('#wineID').val(model.attributes.id);
-        $('#wineGrape').val(model.attributes.grape);
-        $('#wineEstate').val(model.attributes.estate);
-        $('#wineName').val(model.attributes.name);
-        $('#wineNotes').val(model.attributes.notes);
-        $('#wineRating').val(model.attributes.rating);
+        $('#detailsID').val(model.attributes.id);
+        $('#detailsVarietal').val(model.attributes.varietal);
+        $('#detailsProducer').val(model.attributes.producer);
+        $('#detailsWineName').val(model.attributes.wineName);
+        $('#detailsVintage').val(model.attributes.vintage);
+        $('#detailsQuantity').val(model.attributes.quantity);
+        $('#detailsMyNotes').val(model.attributes.myNotes);
+        $('#detailsMyRating').val(model.attributes.myRating);
       } else {
         //new entry
         console.log('no model');
@@ -315,32 +306,36 @@
       });
 
       //save the data
-      if(data.wineID){
-        console.log('existing wine updated, id:' + data.wineID);
+      if(data.detailsID){
+        console.log('existing wine updated, id:' + data.detailsID);
 
         //update existing wine - find model and update it?
         //app.views.mycellarView
         app.views.mycellarView.collection.each(function(record) {
         console.log('Wine id is: ' + record.attributes.id);
-        if(record.attributes.id == data.wineID) {
-          console.log('match found: ' + data.wineID);
+        if(record.attributes.id == data.detailsID) {
+          console.log('match found: ' + data.detailsID);
           //console.dir(data);
           
           record.save({
-            grape: data.wineGrape,
-            estate: data.wineEstate,
-            name: data.wineName,
-            notes: data.wineNotes,
-            rating: data.wineRating
+            varietal: data.detailsVarietal,
+            producer: data.detailsProducer,
+            wineName: data.detailsWineName,
+            vintage: data.detailsVintage,
+            quantity: data.detailsQuantity,
+            myNotes: data.detailsMyNotes,
+            myRating: data.detailsMyRating
             //createdById: app.user.attributes.id,
             //createdByName: app.user.attributes.username
           }, {
             success: function (model, response) {
               console.log("success");
               console.dir(model);
+              console.dir(response);
+              console.dir('New ID is: ' + model.id)
              
-              app.views.mycellarView.collection.fetch(); 
-              app.views.mycellarView.render(); 
+              //app.views.mycellarView.collection.fetch(); 
+              //app.views.mycellarView.render(); 
               //this doesnt work it needs to re-render the model update in myCellar
 
               app.showView(app.views.mycellarView);
@@ -362,19 +357,22 @@
         var newWine = new app.Record();
 
         newWine.save({
-          grape: this.$el.find('#add-edit-wine #wineGrape').val(),
-          estate: this.$el.find('#add-edit-wine #wineEstate').val(),
-          name: this.$el.find('#add-edit-wine #wineName').val(),
-          notes: this.$el.find('#add-edit-wine #wineNotes').val(),
-          rating: this.$el.find('#add-edit-wine #wineRating').val(),
+          varietal: this.$el.find('#add-edit-wine #detailsVarietal').val(),
+          producer: this.$el.find('#add-edit-wine #detailsProducer').val(),
+          wineName: this.$el.find('#add-edit-wine #detailsWineName').val(),
+          vintage: this.$el.find('#add-edit-wine #detailsVintage').val(),
+          quantity: this.$el.find('#add-edit-wine #detailsQuantity').val(),
+          myNotes: this.$el.find('#add-edit-wine #detailsMyNotes').val(),
+          myRating: this.$el.find('#add-edit-wine #detailsMyRating').val(),
           createdById: app.user.attributes.id,
           createdByName: app.user.attributes.username
         }, {
           success: function (model, response) {
             console.log("success");
-            //console.dir(model);
-            //$('#wine-modal').modal('hide');
-            app.views.mycellarView.collection.add(model);
+            console.dir(model); //why does model contain the other response crap? Using respone.record for clean model
+            console.dir(response);
+            console.dir('New ID is: ' + response.record.id)
+            app.views.mycellarView.collection.add(response.record);
 
             app.showView(app.views.mycellarView);
           },
@@ -402,7 +400,6 @@
     template: _.template(JST["assets/views/header/tmpl-header.html"]()), //We need to jade this and pass data
     events: {
       'click #gotoHome': 'processHome',
-      'click #gotoAbout': 'processAbout',
       'click #gotoCellar': 'processCellar',
       'click #doSignIn': 'doSignIn',
       'click #doSignUp': 'doSignUp',
@@ -420,7 +417,7 @@
       this.render();
     },
     render: function() {
-      this.$el.html(this.template( 'hello' ));
+      this.$el.html(this.template( app.user.attributes ));
       return this;
     },
     processHome: function(e){
@@ -430,20 +427,12 @@
       $('#public-menu').children().removeClass('active');
       app.showView(app.views.homeView);
     },
-    processAbout: function(e){
-      e.preventDefault();
-      console.log('view: #gotoAbout clicked');
-
-      $('#public-menu > li.active').removeClass('active');
-      app.showView(app.views.aboutView);
-      $('#gotoAbout').parent().addClass('active');
-    },
     processCellar: function(e){
       e.preventDefault();
       console.log('view: #gotoCellar clicked');
 
       $('#public-menu > li.active').removeClass('active');
-      app.showView(app.views.cellarView);
+      app.showView(app.views.mycellarView);
       $('#gotoCellar').parent().addClass('active');
     },
     doSignIn: function(e){
@@ -682,21 +671,6 @@
     }
   });
 
-  app.AboutView = Backbone.View.extend({
-    el: '#about',
-    template: _.template(JST["assets/views/about/tmpl-about.html"]()), //We need to jade this and pass data
-    initialize: function() {
-      console.log('aboutView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( 'hello' ));
-      return this;
-    }
-  });
-
   /////////////////////////////////////////////////////////////
   //*************        PROFILE     ************************//
   /////////////////////////////////////////////////////////////
@@ -718,8 +692,8 @@
       var avgRating = 0;
       if(wines.length > 0){
         wines.each(function(wine) {
-          console.log(wine.attributes.rating);
-          avgRating += parseInt(wine.attributes.rating);
+          console.log(wine.attributes.myRating);
+          avgRating += parseInt(wine.attributes.myRating);
         });
       } else {
         avgRating = 0;
@@ -1150,8 +1124,6 @@
     app.views.headerView = new app.HeaderView();
     app.views.homeView = new app.HomeView();
     app.views.current = app.views.homeView;
-    app.views.aboutView = new app.AboutView();
-    app.views.cellarView = new app.CellarView();
     //mycellarView: created upon login
     //profile: created upon login
     //admin: created upon login
@@ -1249,10 +1221,13 @@
     loggedInBtn += '</ul>';
 
     $('div.dropdown').html(loggedInBtn);
-    $('.dropdown-toggle').dropdown('toggle');
+    $('#signedinDropdown').parent().removeClass('open'); 
+
+    $('#public-menu').append('<li><a id="gotoCellar" href="#">My Cellar</a></li>');
 
     //move to cellar
-    app.showView(app.views.cellarView);
+    app.showView(app.views.mycellarView);
+    $('#gotoCellar').parent().addClass('active');
     $(app.views.detailsView.el).hide(); 
 
   }
@@ -1289,11 +1264,11 @@
       }
     }
 
-    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
-      console.log('showView: user logged in and requested cellarView');
+    /*if(typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
+      console.log('showView: user logged in and requested mycellarView');
       
       view = app.views.mycellarView;
-    }
+    }*/
 
     if(app.views.current != undefined){
         $(app.views.current.el).hide();

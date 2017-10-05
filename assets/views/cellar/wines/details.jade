@@ -1,25 +1,31 @@
 block item-details
   div.row
-    h1
+    h1 Add/Edit Wine
     form#add-edit-wine
       div.form-group.hidden
-        label(for="wineID") ID
-        input#wineID.form-control(type="text") 
+        label(for="detailsID") ID
+        input#detailsID.form-control(type="text") 
       div.form-group
-        label(for="wineGrape") Grape
-        input#wineGrape.form-control(type="text" placeholder="Shiraz") 
+        label(for="detailsVarietal") Varietal
+        input#detailsVarietal.form-control(type="text" placeholder="Shiraz") 
       div.form-group
-        label(for="wineEstate") Estate
-        input#wineEstate.form-control(type="text" placeholder="Penfolds")
+        label(for="detailsProducer") Estate
+        input#detailsProducer.form-control(type="text" placeholder="Penfolds")
       div.form-group
-        label(for="wineName") Wine
-        input#wineName.form-control(type="text" placeholder="2012 Bin 104 Special Reserve")
+        label(for="detailsWineName") Wine
+        input#detailsWineName.form-control(type="text" placeholder="Bin 104 Special Reserve")
       div.form-group
-        label(for="wineNotes") Notes
-        textarea#wineNotes.form-control(type="text" placeholder="Spicy with hints of orange zest")  
+        label(for="detailsVintage") Vintage (Year)
+        input#detailsVintage.form-control(type="text" placeholder="2012") 
       div.form-group
-        label(for="wineRating") Rating
-        select#wineRating.form-control
+        label(for="detailsQuantity") Quantity
+        input#detailsQuantity.form-control(type="text" placeholder="12")   
+      div.form-group
+        label(for="detailsMyNotes") Notes
+        textarea#detailsMyNotes.form-control(type="text" placeholder="Spicy with hints of orange zest")  
+      div.form-group
+        label(for="detailsMyRating") Rating
+        select#detailsMyRating.form-control
           option 10
           option 9.9     
           option 9.8  

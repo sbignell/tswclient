@@ -1,7 +1,15 @@
 td.delete 
-  input.delete-wine(type='checkbox')
-td.grape <%= attributes.grape %>
-td.estate <%= attributes.estate %>
-td#wine-details.name <%= attributes.name %>
-td.notes <%= attributes.notes %>
-td.rating <%= attributes.rating %>
+  button#delete-wine.btn.btn-default.btn-sm(data-backdrop="false") 
+    span.fa.fa-trash-o
+td.edit 
+  button#wine-details.btn.btn-default.btn-sm(data-backdrop="false")
+    span.fa.fa-pencil-square-o
+td#id.hidden <%= attributes.id %>
+td.image    
+td.varietal <%= attributes.varietal %>
+td.producer <%= attributes.producer %>
+td#name <%= attributes.wineName %>
+td.vintage <%= attributes.vintage %>
+td.quantity <%= attributes.quantity %>
+td.myNotes <%= attributes.myNotes %>
+td.myRating <%= attributes.myRating %>
